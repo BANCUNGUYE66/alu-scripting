@@ -12,8 +12,9 @@ def top_ten(subreddit):
     If not a valid subreddit, print None.
     """
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    # CHANGE: Using a slightly different User-Agent to avoid rate limits
     headers = {
-        "User-Agent": "linux:0x01.api.advanced:v1.0.0 (by /u/bdov_)"
+        "User-Agent": "linux:0x01.api.advanced:v1.0.0 (by /u/custom_user)"
     }
     params = {
         "limit": 10
