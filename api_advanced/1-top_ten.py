@@ -12,9 +12,10 @@ def top_ten(subreddit):
     If not a valid subreddit, print None.
     """
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    # CHANGE: Using a slightly different User-Agent to avoid rate limits
+    
+    # CHANGE: Using a unique User-Agent with your username to bypass blocks
     headers = {
-        "User-Agent": "linux:0x01.api.advanced:v1.0.0 (by /u/custom_user)"
+        "User-Agent": "python:alu-scripting:v1.0.0 (by /u/BANCUNGUYE66)"
     }
     params = {
         "limit": 10
@@ -22,6 +23,8 @@ def top_ten(subreddit):
     try:
         response = requests.get(url, headers=headers, params=params,
                                 allow_redirects=False)
+        
+        # If the status code is not 200 (OK), the subreddit is invalid
         if response.status_code != 200:
             print("None")
             return
@@ -29,6 +32,7 @@ def top_ten(subreddit):
         results = response.json().get("data")
         children = results.get("children")
 
+        # Print the titles
         for child in children:
             print(child.get("data").get("title"))
 
